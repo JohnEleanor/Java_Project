@@ -16,38 +16,45 @@ public final class MainApp extends JFrame implements ActionListener {
         setVisible(true);
     }
 
+
+    /*
+     * USE Pin for Login มั้ย
+     * ใช้อะไร Login 
+     */
     public void init() {
         container = getContentPane();
         container.setLayout(new FlowLayout());
 
+        // Set font globally
+        Font font = new Font("Tahoma", Font.PLAIN, 15);
+
         userLabel = new JLabel("ชื่อผู้ใช้");
-        userLabel.setFont(new Font("Tahoma", Font.PLAIN, 15)); // Set font to Thai
+        userLabel.setFont(font);
         container.add(userLabel);
 
         userField = new JTextField(15);
+        userField.setFont(font);
         container.add(userField);
 
-        
         container.add(Box.createHorizontalStrut(500));
 
         passLabel = new JLabel("รหัสผ่าน");
-        passLabel.setFont(new Font("Tahoma", Font.PLAIN, 15)); // Set font to Thai
+        passLabel.setFont(font);
         container.add(passLabel);
 
         passField = new JTextField(15);
+        passField.setFont(font);
         container.add(passField);
 
         JButton LoginBtn = new JButton("เข้าสู่ระบบ");
-        LoginBtn.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        LoginBtn.setFont(font);
         LoginBtn.addActionListener(this);
         container.add(LoginBtn);
 
         JButton RegisterBtn = new JButton("สมัครสมาชิก");
-        RegisterBtn.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        RegisterBtn.setFont(font);
         RegisterBtn.addActionListener(this);
         container.add(RegisterBtn);
-
-        
     }
 
     public void actionPerformed(ActionEvent event) {
