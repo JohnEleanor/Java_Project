@@ -7,62 +7,88 @@ public final class MainApp extends JFrame implements ActionListener {
     JLabel userLabel, passLabel;
     JTextField userField, passField;
     JButton LoginBtn, RegisterBtn;
-    public MainApp() {
-        setTitle("Bank Account Management System"); 
-        init();
-        setSize(300, 200);
-        setLocationRelativeTo(null);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setVisible(true);
-    }
 
+    public MainApp() {
+        setTitle("Car Parking Management System");
+        init();
+
+
+    }
 
     /*
      * USE Pin for Login มั้ย
-     * ใช้อะไร Login 
+     * ใช้อะไร Login
      */
     public void init() {
         container = getContentPane();
         container.setLayout(new FlowLayout());
 
-        // Set font globally
         Font font = new Font("Tahoma", Font.PLAIN, 15);
+        JFrame f = new JFrame("Login Form");
 
-        userLabel = new JLabel("ชื่อผู้ใช้");
-        userLabel.setFont(font);
-        container.add(userLabel);
+        // Create components
+        JLabel userJLabel = new JLabel("ชื่อผู้ใช้ :");
+        userJLabel.setFont(font);
+        JLabel pass = new JLabel("รหัสผ่าน :");
+        pass.setFont(font);
 
-        userField = new JTextField(15);
-        userField.setFont(font);
-        container.add(userField);
+        JTextField userField = new JTextField(10);
+        JPasswordField passf = new JPasswordField(10);
 
-        container.add(Box.createHorizontalStrut(500));
-
-        passLabel = new JLabel("รหัสผ่าน");
-        passLabel.setFont(font);
-        container.add(passLabel);
-
-        passField = new JTextField(15);
-        passField.setFont(font);
-        container.add(passField);
-
-        LoginBtn = new JButton("เข้าสู่ระบบ");
-        LoginBtn.setFont(font);
-        LoginBtn.addActionListener(this);
-        container.add(LoginBtn);
-
-        RegisterBtn = new JButton("สมัครสมาชิก");
+        JButton Loginbtn = new JButton("เข้าสู่ระบบ");
+        Loginbtn.setFont(font);
+        JButton RegisterBtn = new JButton("สมัครสมาชิก");
         RegisterBtn.setFont(font);
-        RegisterBtn.addActionListener(this);
-        container.add(RegisterBtn);
+
+        // Set layout manager
+        f.setLayout(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(5, 0, 5, 5);
+
+        // Add username label
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        f.add(userJLabel, gbc);
+
+        // Add username field
+        gbc.gridx = 1;
+        f.add(userField, gbc);
+
+        // Add password label
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        f.add(pass, gbc);
+
+        // Add password field
+        gbc.gridx = 1;
+        f.add(passf, gbc);
+
+        // Add login button
+        gbc.gridx = 1;
+        gbc.gridy = 2;
+        f.add(Loginbtn, gbc);
+
+        // Add Register button
+        gbc.gridx = 2;
+        gbc.gridy = 2;
+        f.add(RegisterBtn, gbc);
+
+        f.setBounds(500, 200, 400, 200);
+        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        f.setVisible(true);
+        Container c = f.getContentPane();
+        System.out.println(c);
+
+       
+
     }
 
     public void actionPerformed(ActionEvent event) {
 
-
-        if (event.getSource() == LoginBtn){
+        if (event.getSource() == LoginBtn) {
             System.out.println("Login button clicked");
-        } else if (event.getSource() == RegisterBtn){
+        } else if (event.getSource() == RegisterBtn) {
             System.out.println("Register button clicked");
         }
     }
@@ -71,7 +97,4 @@ public final class MainApp extends JFrame implements ActionListener {
         new MainApp();
     }
 
-    
 }
-
-
