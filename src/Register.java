@@ -95,21 +95,14 @@ public final class Register extends JFrame implements ActionListener {
             
         } else if (event.getSource() == RegisterBtn){
 
-            if (userField.getText() == "" || passField.getText() == "" || passConfirmField.getText() == "") {
-                print("Data is Empty");
+            if ( passField.getText().equals( passConfirmField.getText() ) ){
+              
+                print("Password match");
             } else {
-
-                if ( passField.getText() == passConfirmField.getText() ) {
-                    print("Register Success");
-                } else {
-                    
-                    print(passField.getText());
-                    print(passConfirmField.getText());
-                    print("Password not match");
-    
-                }
-
+                print("Password not match");
             }
+                
+
 
            
         }
