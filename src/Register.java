@@ -7,15 +7,16 @@ public final class Register extends JFrame implements ActionListener {
     JLabel userLabel, passLabel, passConfirmLabel, emailLabel;
     JTextField userField, passField, passConfirmField, emailField;
     JButton BackToHomePage, RegisterBtn;
+
+
     public Register() {
-        setTitle("Car Parking Management System"); 
+        setTitle("Cafe Management System"); 
         init();
         setSize(500, 250);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setVisible(true);
     }
-
 
     /*
      * Use Pin for Login มั้ย
@@ -24,7 +25,7 @@ public final class Register extends JFrame implements ActionListener {
     public void init() {
         container = getContentPane();
         container.setLayout(new GridBagLayout());
-        GridBagConstraints gbc=new GridBagConstraints();
+        GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets=new Insets(5,5,3,5);
 
         Font font = new Font("Tahoma", Font.PLAIN, 15);
@@ -105,24 +106,34 @@ public final class Register extends JFrame implements ActionListener {
             
         } else if (event.getSource() == RegisterBtn){
 
-            // Check password match And not empty
+            //  Check password match And not empty
             if ( ( passField.getText().equals( passConfirmField.getText() ) ) && (passField.getText().length() > 0 && passConfirmField.getText().length() > 0) ){
               
                 if (userField.getText().length() > 0 && emailField.getText().length() > 0){
+
                     JOptionPane.showMessageDialog(null, "Register Success", "Success", 3);
                     Login login = new Login();
                     login.setVisible(true);
                     this.dispose();
+
+                    //! Register Success Let Save Data to Database
+                    /*
+                     * username 
+                     * password
+                     * role
+                     * email
+                    */
+
                 }else {
+
                     JOptionPane.showMessageDialog(null, "Please fill all field", "Error", JOptionPane.ERROR_MESSAGE);
+
                 }
             } else {
 
                 JOptionPane.showMessageDialog(null, "Your password not match", "Error", JOptionPane.ERROR_MESSAGE);
 
             }
-                
-
 
            
         }

@@ -8,7 +8,7 @@ public final class Login extends JFrame implements ActionListener {
     JTextField userField, passField;
     JButton LoginBtn, RegisterBtn;
     public Login() {
-        setTitle("Car Parking Management System"); 
+        setTitle("Cafe Management System"); 
         init();
 
 

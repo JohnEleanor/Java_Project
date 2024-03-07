@@ -8,7 +8,7 @@ public final class MainApp extends JFrame implements ActionListener {
     JTextField userField, passField;
     JButton LoginBtn, RegisterBtn;
     public MainApp() {
-        setTitle("Car Parking Management System"); 
+        setTitle("Cafe Management System"); 
         init();
 
 
