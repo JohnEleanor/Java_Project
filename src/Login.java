@@ -77,8 +77,7 @@ public final class Login extends JFrame implements ActionListener {
 
     public void CheckLogin(String username, String password) {
         // ใส่โค้ดเช็ค Login ที่นี่
-      
-        System.out.println(username + " " + password);
+
 
         DatabaseCFG db = new DatabaseCFG();
         // db.init();
@@ -87,6 +86,10 @@ public final class Login extends JFrame implements ActionListener {
             JOptionPane.showMessageDialog(null, "Welcome to Cafe Management System", "Login Success", 3);
 
             // Login ผ่านไปหน้าอื่น
+
+            MainApp mainApp = new MainApp();
+            mainApp.setVisible(true);
+            this.dispose();
         } else {
             JOptionPane.showMessageDialog(null, "Error Plase Try Again", "Login Error", 0);
 
