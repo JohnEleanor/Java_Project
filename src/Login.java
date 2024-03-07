@@ -56,39 +56,41 @@ public final class Login extends JFrame implements ActionListener {
         gbc.gridy=1; 
         container.add(passField,gbc);
 
-        LoginBtn = new JButton("เข้าสู่ระบบ");
-        LoginBtn.setFont(font);
-        LoginBtn.addActionListener(this);
-        gbc.gridx=0;
-        gbc.gridy=3; 
-        container.add(LoginBtn,gbc);
-
         RegisterBtn = new JButton("สมัครสมาชิก");
         RegisterBtn.setFont(font);
         RegisterBtn.addActionListener(this);
-        gbc.gridx=1;
+        gbc.gridx=0;
         gbc.gridy=3;
         container.add(RegisterBtn,gbc);
 
+        LoginBtn = new JButton("เข้าสู่ระบบ");
+        LoginBtn.setFont(font);
+        LoginBtn.addActionListener(this);
+        gbc.gridx=1;
+        gbc.gridy=3; 
+        container.add(LoginBtn,gbc);
+
+      
+
     }
 
-    public void print(String text){
-        System.out.println(text);
-    }
 
     public void actionPerformed(ActionEvent event) {
 
 
         if (event.getSource() == LoginBtn){
 
-            print("This is Username : "+userField.getText());
-            print("This is Password : "+passField.getText());
-            print("=====================================");
+            System.out.println("This is Username : "+userField.getText());
+            System.out.println("This is Password : "+passField.getText());
+
+            System.out.println("=====================================");
         } else if (event.getSource() == RegisterBtn){
 
 
+            Register register = new Register();
+            register.setVisible(true);
+            this.dispose();
 
-            print("Goto Register Page");
         }
     }
 

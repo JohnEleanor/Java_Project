@@ -4,8 +4,8 @@ import javax.swing.*;
 
 public final class Register extends JFrame implements ActionListener {
     Container container;
-    JLabel userLabel, passLabel, passConfirmLabel;
-    JTextField userField, passField, passConfirmField;
+    JLabel userLabel, passLabel, passConfirmLabel, emailLabel;
+    JTextField userField, passField, passConfirmField, emailField;
     JButton BackToHomePage, RegisterBtn;
     public Register() {
         setTitle("Car Parking Management System"); 
@@ -18,7 +18,7 @@ public final class Register extends JFrame implements ActionListener {
 
 
     /*
-     * USE Pin for Login มั้ย
+     * Use Pin for Login มั้ย
      * ใช้อะไร Login 
     */
     public void init() {
@@ -66,24 +66,32 @@ public final class Register extends JFrame implements ActionListener {
         gbc.gridy=2; 
         container.add(passConfirmField,gbc);
 
+        emailLabel = new JLabel("อีเมล์");
+        emailLabel.setFont(font);
+        gbc.gridx=0;
+        gbc.gridy=3;
+        container.add(emailLabel,gbc);
+
+        emailField = new JTextField(15);
+        emailField.setFont(font);
+        gbc.gridx=1;
+        gbc.gridy=3; 
+        container.add(emailField,gbc);
+
         BackToHomePage = new JButton("กลับไปหน้าหลัก");
         BackToHomePage.setFont(font);
         BackToHomePage.addActionListener(this);
         gbc.gridx=0;
-        gbc.gridy=3; 
+        gbc.gridy=4; 
         container.add(BackToHomePage,gbc);
 
         RegisterBtn = new JButton("สมัครสมาชิก");
         RegisterBtn.setFont(font);
         RegisterBtn.addActionListener(this);
         gbc.gridx=1;
-        gbc.gridy=3;
+        gbc.gridy=4;
         container.add(RegisterBtn,gbc);
 
-    }
-
-    public void print(String text){
-        System.out.println(text);
     }
 
     public void actionPerformed(ActionEvent event) {
@@ -91,15 +99,27 @@ public final class Register extends JFrame implements ActionListener {
 
         if (event.getSource() == BackToHomePage){
 
-            print("Back to Home Page");
+            Login login = new Login();
+            login.setVisible(true);
+            this.dispose();
             
         } else if (event.getSource() == RegisterBtn){
 
-            if ( passField.getText().equals( passConfirmField.getText() ) ){
+            // Check password match And not empty
+            if ( ( passField.getText().equals( passConfirmField.getText() ) ) && (passField.getText().length() > 0 && passConfirmField.getText().length() > 0) ){
               
-                print("Password match");
+                if (userField.getText().length() > 0 && emailField.getText().length() > 0){
+                    JOptionPane.showMessageDialog(null, "Register Success", "Success", 3);
+                    Login login = new Login();
+                    login.setVisible(true);
+                    this.dispose();
+                }else {
+                    JOptionPane.showMessageDialog(null, "Please fill all field", "Error", JOptionPane.ERROR_MESSAGE);
+                }
             } else {
-                print("Password not match");
+
+                JOptionPane.showMessageDialog(null, "Your password not match", "Error", JOptionPane.ERROR_MESSAGE);
+
             }
                 
 
