@@ -7,6 +7,7 @@ public final class Login extends JFrame implements ActionListener {
     JLabel userLabel, passLabel;
     JTextField userField, passField;
     JButton LoginBtn, RegisterBtn;
+
     public Login() {
         setTitle("Cafe Management System"); 
         init();
@@ -74,16 +75,34 @@ public final class Login extends JFrame implements ActionListener {
 
     }
 
+    public void CheckLogin(String username, String password) {
+        // ใส่โค้ดเช็ค Login ที่นี่
+      
+        System.out.println(username + " " + password);
+
+        DatabaseCFG db = new DatabaseCFG();
+        // db.init();
+        boolean res = db.checkUser(username, password);
+        if (res) {
+            JOptionPane.showMessageDialog(null, "Welcome to Cafe Management System", "Login Success", 3);
+
+            // Login ผ่านไปหน้าอื่น
+        } else {
+            JOptionPane.showMessageDialog(null, "Error Plase Try Again", "Login Error", 0);
+
+        }
+        
+
+    }
 
     public void actionPerformed(ActionEvent event) {
 
 
         if (event.getSource() == LoginBtn){
 
-            System.out.println("This is Username : "+userField.getText());
-            System.out.println("This is Password : "+passField.getText());
+            CheckLogin(userField.getText(), passField.getText());
 
-            System.out.println("=====================================");
+
         } else if (event.getSource() == RegisterBtn){
 
 
