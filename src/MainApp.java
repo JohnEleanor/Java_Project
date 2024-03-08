@@ -7,8 +7,10 @@ public final class MainApp extends JFrame implements ActionListener {
     JLabel userLabel, passLabel;
     JTextField userField, passField;
     JButton LoginBtn, RegisterBtn, ExitBtn;
+
+
     public MainApp() {
-        setTitle("Cafe Management System"); 
+        setTitle("Car Rental Management System"); 
         init();
 
 
@@ -16,6 +18,13 @@ public final class MainApp extends JFrame implements ActionListener {
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setVisible(true);
+    }
+
+    public MainApp(String username, String role){
+        setTitle("Car Rental Management System"); 
+        init();
+        System.out.println("Welcome " + username + " Role: " + role);
+        JOptionPane.showMessageDialog(null, "ยิน " + username + " ");
     }
 
 
@@ -37,6 +46,8 @@ public final class MainApp extends JFrame implements ActionListener {
         gbc.gridx = 1;
         gbc.gridy = 4;
         container.add(ExitBtn, gbc);
+
+       
 
     }
 

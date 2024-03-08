@@ -1,7 +1,6 @@
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-import java.sql.*;
 
 public final class Register extends JFrame implements ActionListener {
     Container container;
@@ -9,19 +8,14 @@ public final class Register extends JFrame implements ActionListener {
     JTextField userField, passField, passConfirmField, emailField;
     JButton BackToHomePage, RegisterBtn;
 
-    String url = "jdbc:mysql://localhost:3306/cafe";
-    String databaseName = "cafe";
-    String user = "root";
-    String password = "";
+
+    DatabaseCFG db = new DatabaseCFG();
+
 
     public Register() {
-        setTitle("Cafe Management System");
-        boolean Connect = ConnectSql();
-        if (!Connect) {
-            JOptionPane.showMessageDialog(null, "Can't Connect to Database", "Error", JOptionPane.ERROR_MESSAGE);
-        } else {
-            System.out.println("Database Connected :) ");
-        }
+        setTitle("Car Rental Management System");
+        
+       
         init();
         setSize(500, 250);
         setLocationRelativeTo(null);
@@ -105,22 +99,7 @@ public final class Register extends JFrame implements ActionListener {
 
     }
 
-    public boolean ConnectSql() {
-        try (Connection conn = DriverManager.getConnection(url, user, password);
-                Statement stmt = conn.createStatement();
-                ResultSet rs = stmt.executeQuery("SHOW DATABASES")) {
-            while (rs.next()) {
-                if (rs.getString(1).equals(databaseName)) {
-                    return true;
-                }
-            }
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-            return false;
-        }
-        return false;
-
-    }
+  
 
     public void actionPerformed(ActionEvent event) {
 
@@ -151,15 +130,9 @@ public final class Register extends JFrame implements ActionListener {
                      * email
                      */
 
-                    try (Connection conn = DriverManager.getConnection(url, user, password);
-                            Statement stmt = conn.createStatement()) {
-                        String sql = "INSERT INTO user (username, password, role, email) VALUES ('" + userField.getText()
-                                + "', '" + passField.getText() + "', 'user', '" + emailField.getText() + "')";
-                        stmt.executeUpdate(sql);
-                    } catch (SQLException e) {
-                        System.out.println(e.getMessage());
-                        JOptionPane.showMessageDialog(null, "Data Insert Error");
-                    }
+                     db.insertUser(userField.getText(), passField.getText(), emailField.getText());
+
+                   
 
 
                 } else {

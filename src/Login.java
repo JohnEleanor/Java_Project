@@ -7,9 +7,12 @@ public final class Login extends JFrame implements ActionListener {
     JLabel userLabel, passLabel;
     JTextField userField, passField;
     JButton LoginBtn, RegisterBtn;
+    DatabaseCFG db = new DatabaseCFG();
+
+
 
     public Login() {
-        setTitle("Cafe Management System"); 
+        setTitle("Car Rental Management System"); 
         init();
 
 
@@ -79,13 +82,12 @@ public final class Login extends JFrame implements ActionListener {
         // ใส่โค้ดเช็ค Login ที่นี่
 
 
-        DatabaseCFG db = new DatabaseCFG();
-        // db.init();
+        
+
         boolean res = db.checkUser(username, password);
         if (res) {
-            JOptionPane.showMessageDialog(null, "Welcome to Cafe Management System", "Login Success", 3);
+            // JOptionPane.showMessageDialog(null, "Welcome to Car Rental Management System", "Login Success", 3);
 
-            // Login ผ่านไปหน้าอื่น
 
             MainApp mainApp = new MainApp();
             mainApp.setVisible(true);

@@ -1,12 +1,13 @@
 import java.sql.*;
 
+import javax.swing.JOptionPane;
 
 public class DatabaseCFG {
 
-    private String url = "jdbc:mysql://localhost:3306/cafe";
+    private String url = "jdbc:mysql://localhost:3306/car_rental_system";
     private String user = "root";
     private String password = "";
-    private String databaseName = "cafe";
+    private String databaseName = "car_rental_system";
 
     public void init() {
         try (Connection conn = DriverManager.getConnection(this.url, this.user, this.password);
@@ -28,27 +29,40 @@ public class DatabaseCFG {
      * ! Zone For User
      */
     public boolean checkUser(String username, String password) {
-        
+
         try (Connection conn = DriverManager.getConnection(this.url, this.user, this.password);
                 Statement stmt = conn.createStatement();
-                ResultSet rs = stmt.executeQuery("SELECT * FROM user WHERE username = '" + username + "' AND password = '" + password + "'" )) {
-                if (rs.next()) {
-                    System.out.println("[DatabaseCFG]: User Found");
-                    return true;
-                } else {
-                    System.out.println("[DatabaseCFG]: User Not Found");
-                    return false;
-                }
-           
+                ResultSet rs = stmt.executeQuery(
+                        "SELECT * FROM user WHERE username = '" + username + "' AND password = '" + password + "'")) {
+            if (rs.next()) {
+                UserData userData = new UserData();
+                userData.SetDataUser(rs.getString("username"), rs.getString("role"));
+                // System.out.println("[Debug]: User Found");
+                return true;
+            } else {
+                System.out.println("[Debug]: User Not Found");
+                return false;
+            }
+
         } catch (SQLException e) {
             System.out.println(e.getMessage());
 
-        }   
+        }
         return false;
     }
 
-    public void insertUser() {
-
+    public boolean insertUser(String username, String password, String email) {
+        try (Connection conn = DriverManager.getConnection(this.url, this.user, this.password);
+                Statement stmt = conn.createStatement()) {
+            String sql = "INSERT INTO user (username, password, role, email) VALUES ('" + username
+                    + "', '" + password + "', 'user', '" + email + "')";
+            stmt.executeUpdate(sql);
+            return true;
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            JOptionPane.showMessageDialog(null, "Data Insert Error");
+        }
+        return false;
     }
 
     public void updateUser() {
