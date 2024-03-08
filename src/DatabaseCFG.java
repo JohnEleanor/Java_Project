@@ -28,17 +28,23 @@ public class DatabaseCFG {
     /*
      * ! Zone For User
      */
-    public boolean checkUser(String username, String password) {
+    public boolean checkUser(String username, String password, boolean isLogin) {
 
         try (Connection conn = DriverManager.getConnection(this.url, this.user, this.password);
                 Statement stmt = conn.createStatement();
                 ResultSet rs = stmt.executeQuery(
                         "SELECT * FROM user WHERE username = '" + username + "' AND password = '" + password + "'")) {
             if (rs.next()) {
-                UserData userData = new UserData();
-                userData.SetDataUser(rs.getString("username"), rs.getString("role"));
-                // System.out.println("[Debug]: User Found");
-                return true;
+                if (isLogin){
+                    UserData userData = new UserData();
+                    userData.SetDataUser(rs.getString("username"), rs.getString("role"));
+                    return true;
+                }else {
+                    System.out.println("[Debug]: User Found");
+                    return true;
+                }
+              
+                
             } else {
                 System.out.println("[Debug]: User Not Found");
                 return false;

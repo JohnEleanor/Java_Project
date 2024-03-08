@@ -84,7 +84,7 @@ public final class Login extends JFrame implements ActionListener {
 
         
 
-        boolean res = db.checkUser(username, password);
+        boolean res = db.checkUser(username, password, true);
         if (res) {
             // JOptionPane.showMessageDialog(null, "Welcome to Car Rental Management System", "Login Success", 3);
 
