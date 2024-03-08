@@ -7,25 +7,20 @@ public final class MainApp extends JFrame implements ActionListener {
     JLabel userLabel, passLabel;
     JTextField userField, passField;
     JButton LoginBtn, RegisterBtn, ExitBtn;
-
+    UserData userData = new UserData();
 
     public MainApp() {
-        setTitle("Car Rental Management System"); 
         init();
-
-
-        setSize(500, 500);
-        setLocationRelativeTo(null);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setVisible(true);
+        
+        
+        System.out.println("Welcome " + userData.getUsername() + " Role: " + userData.getRole());
+        JOptionPane.showMessageDialog(null, "Welcome user : " + userData.getUsername() + " To Car Rental Management System", "Alert", 3);
     }
 
-    public MainApp(String username, String role){
-        setTitle("Car Rental Management System"); 
-        init();
-        System.out.println("Welcome " + username + " Role: " + role);
-        JOptionPane.showMessageDialog(null, "ยิน " + username + " ");
-    }
+    // public MainApp(String username, String role){
+      
+       
+    // }
 
 
     /*
@@ -33,6 +28,11 @@ public final class MainApp extends JFrame implements ActionListener {
      * ใช้อะไร Login 
     */
     public void init() {
+        setTitle("Car Rental Management System"); 
+        
+
+
+
         container = getContentPane();
         container.setLayout(new GridBagLayout());
         GridBagConstraints gbc=new GridBagConstraints();
@@ -47,7 +47,12 @@ public final class MainApp extends JFrame implements ActionListener {
         gbc.gridy = 4;
         container.add(ExitBtn, gbc);
 
-       
+
+
+        setSize(500, 500);
+        setLocationRelativeTo(null);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setVisible(true);
 
     }
 

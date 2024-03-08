@@ -36,8 +36,13 @@ public class DatabaseCFG {
                         "SELECT * FROM user WHERE username = '" + username + "' AND password = '" + password + "'")) {
             if (rs.next()) {
                 if (isLogin){
+                    String roleString = rs.getString("role");
+                    String userString = rs.getString("username");
+
                     UserData userData = new UserData();
-                    userData.SetDataUser(rs.getString("username"), rs.getString("role"));
+
+                    System.out.println("[Debug]: userString: " + userString + " roleString: " + roleString);
+                    userData.SetDataUser(userString, roleString);
                     return true;
                 }else {
                     System.out.println("[Debug]: User Found");
