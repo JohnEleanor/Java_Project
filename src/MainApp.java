@@ -13,14 +13,15 @@ public final class MainApp extends JFrame implements ActionListener {
         init();
         
         
-        System.out.println("Welcome " + userData.getUsername() + " Role: " + userData.getRole());
-        JOptionPane.showMessageDialog(null, "Welcome user : " + userData.getUsername() + " To Car Rental Management System", "Alert", 3);
+        // String txt = "Welcome user : " + userData.getUsername() + " To Car Rental Management System";
+
+        // JOptionPane.showMessageDialog(null, txt, "Alert", 3);
     }
 
-    // public MainApp(String username, String role){
-      
+    public MainApp(String username, String role){
+        init();
        
-    // }
+    }
 
 
     /*
@@ -36,15 +37,15 @@ public final class MainApp extends JFrame implements ActionListener {
         container = getContentPane();
         container.setLayout(new GridBagLayout());
         GridBagConstraints gbc=new GridBagConstraints();
-        gbc.insets=new Insets(5,5,5,5);
+        // gbc.insets=new Insets(5,5,5,5);
         Font font = new Font("Tahoma", Font.PLAIN, 15);
 
 
         ExitBtn = new JButton("ออกจากระบบ");
         ExitBtn.setFont(font);
         ExitBtn.addActionListener(this);
-        gbc.gridx = 1;
-        gbc.gridy = 4;
+        gbc.gridx = 0;
+        gbc.gridy = 0;
         container.add(ExitBtn, gbc);
 
 

@@ -8,6 +8,9 @@ public final class Login extends JFrame implements ActionListener {
     JTextField userField, passField;
     JButton LoginBtn, RegisterBtn;
     DatabaseCFG db = new DatabaseCFG();
+    // Get Role Plase 
+    UserData userData = new UserData();
+
 
 
 
@@ -79,21 +82,23 @@ public final class Login extends JFrame implements ActionListener {
     }
 
     public void CheckLogin(String username, String password) {
-        // ใส่โค้ดเช็ค Login ที่นี่
 
-
-        
 
         boolean res = db.checkUser(username, password, true);
         if (res) {
-            // JOptionPane.showMessageDialog(null, "Welcome to Car Rental Management System", "Login Success", 3);
+          
 
-        // Get Role Plase 
+
             MainApp mainApp = new MainApp();
             mainApp.setVisible(true);
             this.dispose();
+
+            String txt = "Welcome : " + userData.getUsername() + " To Car Rental Management System";
+
+            JOptionPane.showMessageDialog(null, txt, "Alert", 3);
+
         } else {
-            JOptionPane.showMessageDialog(null, "Error Plase Try Again", "Login Error", 0);
+            JOptionPane.showMessageDialog(null, "Database is not connected. :(", "Login Error", 0);
 
         }
         

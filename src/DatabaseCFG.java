@@ -38,11 +38,8 @@ public class DatabaseCFG {
                 if (isLogin){
                     String roleString = rs.getString("role");
                     String userString = rs.getString("username");
+                    UserData userData = new UserData(userString, roleString);
 
-                    UserData userData = new UserData();
-
-                    System.out.println("[Debug]: userString: " + userString + " roleString: " + roleString);
-                    userData.SetDataUser(userString, roleString);
                     return true;
                 }else {
                     System.out.println("[Debug]: User Found");

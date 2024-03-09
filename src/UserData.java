@@ -4,22 +4,42 @@ public class UserData {
     private String username;
     private String role;
 
-    public void SetDataUser(String Input_username, String Input_role) {
-        this.username = Input_username;
-        this.role = Input_role;
-        System.out.println("[UserData] Welcome " + Input_username + " Role: " + Input_role);
-        System.out.println("[UserData] Welcome " + this.username + " Role: " + this.role);
 
-        // JOptionPane.showMessageDialog(null, "Welcome " + this.username + "", "Alert", 3);
+    public UserData() {
+        username = "";
+        role = "";
     }
 
+
+    public UserData(String Input_username, String Input_role) {
+        
+        this.username = Input_username;
+        this.role = Input_role;
+
+        System.out.println("[Debug] Input : " + Input_username + " Role : " + Input_role);
+        System.out.println("[Debug] Set Data Already : " + username + " Role : " + role);
+
+    }
+
+    public void setUser(String Input_username) {
+
+        username = Input_username;
+
+    }
+
+    public void setRole(String Input_role) {
+        role = Input_role;
+
+    }
+
+
     public String getRole(){
-        System.out.println("getRole => "+this.role);
-        return this.role;
+       
+        return (this.role);
     }
 
     public String getUsername() {
-        System.out.println("getUsername => "+this.username);
-        return this.username;
+        
+        return (this.username);
     }
 }

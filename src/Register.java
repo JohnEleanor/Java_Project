@@ -26,7 +26,7 @@ public final class Register extends JFrame implements ActionListener {
     /*
      * Use Pin for Login มั้ย
      * ใช้อะไร Login
-     */
+    */
     public void init() {
         container = getContentPane();
         container.setLayout(new GridBagLayout());
@@ -123,12 +123,13 @@ public final class Register extends JFrame implements ActionListener {
                     this.dispose();
 
                     // ! Register Success Let Save Data to Database
+
                     /*
                      * username
                      * password
                      * role
                      * email
-                     */
+                    */
 
                      db.insertUser(userField.getText(), passField.getText(), emailField.getText());
 
