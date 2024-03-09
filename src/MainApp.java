@@ -11,35 +11,27 @@ public final class MainApp extends JFrame implements ActionListener {
 
     public MainApp() {
         init();
-        
-        
-        // String txt = "Welcome user : " + userData.getUsername() + " To Car Rental Management System";
 
-        // JOptionPane.showMessageDialog(null, txt, "Alert", 3);
+   
     }
 
-    public MainApp(String username, String role){
+    public MainApp(String username, String role) {
         init();
-       System.out.println(userData.getUsername());
-    }
 
+    }
 
     /*
      * USE Pin for Login มั้ย
-     * ใช้อะไร Login 
-    */
+     * ใช้อะไร Login
+     */
     public void init() {
-        setTitle("Car Rental Management System"); 
-        
-
-
+        setTitle("Car Rental Management System");
 
         container = getContentPane();
         container.setLayout(new GridBagLayout());
-        GridBagConstraints gbc=new GridBagConstraints();
+        GridBagConstraints gbc = new GridBagConstraints();
         // gbc.insets=new Insets(5,5,5,5);
         Font font = new Font("Tahoma", Font.PLAIN, 15);
-
 
         ExitBtn = new JButton("ออกจากระบบ");
         ExitBtn.setFont(font);
@@ -48,15 +40,12 @@ public final class MainApp extends JFrame implements ActionListener {
         gbc.gridy = 0;
         container.add(ExitBtn, gbc);
 
-
-
         setSize(500, 500);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setVisible(true);
 
     }
-
 
     public void actionPerformed(ActionEvent event) {
 
@@ -65,14 +54,11 @@ public final class MainApp extends JFrame implements ActionListener {
             login.setVisible(true);
             this.dispose();
         }
-   
+
     }
 
     public static void main(String[] args) {
         new MainApp();
     }
 
-    
 }
-
-

@@ -27,7 +27,7 @@ public class DatabaseCFG {
 
     /*
      * ! Zone For User
-    */
+     */
 
     public boolean checkUser(String username, String password, boolean isLogin) {
 
@@ -36,19 +36,14 @@ public class DatabaseCFG {
                 ResultSet rs = stmt.executeQuery("SELECT * FROM user WHERE username = '" + username + "' AND password = '" + password + "'")) {
             if (rs.next()) {
 
-                if (isLogin){
-                    // String roleString = rs.getString("role");
-                    // String userString = rs.getString("username");
-
-                  
-                   
+                if (isLogin) {
+                    System.out.println("[Debug]: isLogin True");
                     return true;
-                }else {
+                } else {
                     System.out.println("[Debug]: User Found");
                     return true;
                 }
-              
-                
+
             } else {
                 System.out.println("[Debug]: User Not Found");
                 return false;
@@ -83,16 +78,16 @@ public class DatabaseCFG {
 
     }
 
-    public String getRole(String username, String password){
+    public String getRole(String username, String password) {
         String role = "";
         try (Connection conn = DriverManager.getConnection(this.url, this.user, this.password);
                 Statement stmt = conn.createStatement();
-                ResultSet rs = stmt.executeQuery("SELECT * FROM user WHERE username = '" + username + "' AND password = '" + password + "'")) {
+                ResultSet rs = stmt.executeQuery(
+                        "SELECT * FROM user WHERE username = '" + username + "' AND password = '" + password + "'")) {
             if (rs.next()) {
-               role = rs.getString("role");
-               return role;
-              
-                
+                role = rs.getString("role");
+                return role;
+
             } else {
                 System.out.println("[Debug]: User Not Found");
                 return "";
