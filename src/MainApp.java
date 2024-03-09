@@ -30,6 +30,24 @@ public final class MainApp extends JFrame implements ActionListener {
         gbc.gridy = 0;
         container.add(ExitBtn, gbc);
 
+        if (userData.getRole().equals("admin")) {
+
+            System.out.println("[Debug] Admin");
+
+        } else if (userData.getRole().equals("staff")) {
+            
+            System.out.println("[Debug] staff");
+
+
+        } else if (userData.getRole().equals("user")) {
+
+            System.out.println("[Debug] user");
+
+        }else {
+
+            System.out.println("[Debug] Role Not Found");
+        }
+
         setSize(500, 500);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
