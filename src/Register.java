@@ -112,18 +112,13 @@ public final class Register extends JFrame implements ActionListener {
         } else if (event.getSource() == RegisterBtn) {
 
             // Check password match And not empty
-            if ((passField.getText().equals(passConfirmField.getText()))
-                    && (passField.getText().length() > 0 && passConfirmField.getText().length() > 0)) {
+            if ((passField.getText().equals(passConfirmField.getText())) && (passField.getText().length() > 0 && passConfirmField.getText().length() > 0)) {
 
                 if (userField.getText().length() > 0 && emailField.getText().length() > 0) {
 
-                    JOptionPane.showMessageDialog(null, "Register Success", "Success", 3);
-                    Login login = new Login();
-                    login.setVisible(true);
-                    this.dispose();
+
 
                     // ! Register Success Let Save Data to Database
-
                     /*
                      * username
                      * password
@@ -131,7 +126,21 @@ public final class Register extends JFrame implements ActionListener {
                      * email
                     */
 
-                     db.insertUser(userField.getText(), passField.getText(), emailField.getText());
+                    boolean Insert = db.insertUser(userField.getText(), passField.getText(), emailField.getText());
+
+
+                    if (Insert){
+                        JOptionPane.showMessageDialog(null, "Register Success", "Success", 3);
+                        Login login = new Login();
+                        login.setVisible(true);
+                        this.dispose();
+                    }else {
+                        userField.setText("");
+                        passField.setText("");
+                        passConfirmField.setText("");
+                        emailField.setText("");
+                        JOptionPane.showMessageDialog(null, "Register Error User Have Already", "Error", 2);
+                    }
 
                    
 

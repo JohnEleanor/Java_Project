@@ -11,26 +11,16 @@ public final class MainApp extends JFrame implements ActionListener {
 
     public MainApp() {
         init();
-
-   
     }
 
-    public MainApp(String username, String role) {
-        init();
 
-    }
-
-    /*
-     * USE Pin for Login มั้ย
-     * ใช้อะไร Login
-     */
     public void init() {
         setTitle("Car Rental Management System");
 
         container = getContentPane();
         container.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
-        // gbc.insets=new Insets(5,5,5,5);
+      // gbc.insets=new Insets(5,5,5,5);  
         Font font = new Font("Tahoma", Font.PLAIN, 15);
 
         ExitBtn = new JButton("ออกจากระบบ");
