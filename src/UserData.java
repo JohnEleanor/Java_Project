@@ -5,41 +5,48 @@ public class UserData {
     private String role;
 
 
-    public UserData() {
-        username = "";
-        role = "";
-    }
+    public void setUser(String username) {
 
-
-    public UserData(String Input_username, String Input_role) {
+        if (username == null){
+            System.out.println("[Debug] setUser : parameter is null");
+        }else {
+            this.username = username;
+            System.out.println("[Debug] setUser Successfully : " + this.username);
+        }
         
-        this.username = Input_username;
-        this.role = Input_role;
-
-        System.out.println("[Debug] Input : " + Input_username + " Role : " + Input_role);
-        System.out.println("[Debug] Set Data Already : " + username + " Role : " + role);
 
     }
 
-    public void setUser(String Input_username) {
+    public void setRole(String role) {
 
-        username = Input_username;
+        if (role == null){
+            System.out.println("[Debug] setUser : parameter is null");
+        }else {
+            this.role = role;
+            System.out.println("[Debug] setUser Successfully : " + this.role);
+        }
 
     }
-
-    public void setRole(String Input_role) {
-        role = Input_role;
-
-    }
-
 
     public String getRole(){
-       
-        return (this.role);
+        if (this.role == null){
+            System.out.println("[Debug] getRole : role is null");
+            
+        }else {
+            System.out.println("[Debug] getRole : " + role);
+            return (this.role);
+        }
+
+        return ("NILL");
     }
 
     public String getUsername() {
-        
-        return (this.username);
+        if (this.username == null){
+            System.out.println("[Debug] getUsername : null");
+        }  else {
+            System.out.println("[Debug] getUsername : " + username);
+            return (this.username);
+        }
+       return ("NILL");
     }
 }

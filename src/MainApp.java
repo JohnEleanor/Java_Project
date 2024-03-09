@@ -20,7 +20,7 @@ public final class MainApp extends JFrame implements ActionListener {
 
     public MainApp(String username, String role){
         init();
-       
+       System.out.println(userData.getUsername());
     }
 
 

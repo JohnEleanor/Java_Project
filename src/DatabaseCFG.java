@@ -27,19 +27,21 @@ public class DatabaseCFG {
 
     /*
      * ! Zone For User
-     */
+    */
+
     public boolean checkUser(String username, String password, boolean isLogin) {
 
         try (Connection conn = DriverManager.getConnection(this.url, this.user, this.password);
                 Statement stmt = conn.createStatement();
-                ResultSet rs = stmt.executeQuery(
-                        "SELECT * FROM user WHERE username = '" + username + "' AND password = '" + password + "'")) {
+                ResultSet rs = stmt.executeQuery("SELECT * FROM user WHERE username = '" + username + "' AND password = '" + password + "'")) {
             if (rs.next()) {
-                if (isLogin){
-                    String roleString = rs.getString("role");
-                    String userString = rs.getString("username");
-                    UserData userData = new UserData(userString, roleString);
 
+                if (isLogin){
+                    // String roleString = rs.getString("role");
+                    // String userString = rs.getString("username");
+
+                  
+                   
                     return true;
                 }else {
                     System.out.println("[Debug]: User Found");
@@ -79,5 +81,27 @@ public class DatabaseCFG {
 
     public void deleteUser() {
 
+    }
+
+    public String getRole(String username, String password){
+        String role = "";
+        try (Connection conn = DriverManager.getConnection(this.url, this.user, this.password);
+                Statement stmt = conn.createStatement();
+                ResultSet rs = stmt.executeQuery("SELECT * FROM user WHERE username = '" + username + "' AND password = '" + password + "'")) {
+            if (rs.next()) {
+               role = rs.getString("role");
+               return role;
+              
+                
+            } else {
+                System.out.println("[Debug]: User Not Found");
+                return "";
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+
+        }
+        return ("");
     }
 }

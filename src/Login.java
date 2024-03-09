@@ -18,7 +18,6 @@ public final class Login extends JFrame implements ActionListener {
         setTitle("Car Rental Management System"); 
         init();
 
-
         setSize(300, 200);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -27,9 +26,10 @@ public final class Login extends JFrame implements ActionListener {
 
 
     /*
-     * USE Pin for Login มั้ย
-     * ใช้อะไร Login 
+        * USE Pin for Login มั้ย
+        * ใช้อะไร Login 
     */
+    
     public void init() {
         container = getContentPane();
         container.setLayout(new GridBagLayout());
@@ -86,19 +86,31 @@ public final class Login extends JFrame implements ActionListener {
 
         boolean res = db.checkUser(username, password, true);
         if (res) {
-          
+        
 
 
             MainApp mainApp = new MainApp();
             mainApp.setVisible(true);
             this.dispose();
+            
+            String role = db.getRole(username, password);
+            if (role != null){
+                System.out.println("Role : " + role);
+                userData.setRole(role);
+            }else {
+                System.out.println("Role : NULL");
+            }
+            
+            userData.setUser(username);
+            
 
             String txt = "Welcome : " + userData.getUsername() + " To Car Rental Management System";
-
             JOptionPane.showMessageDialog(null, txt, "Alert", 3);
 
+            System.out.println("USER : "+userData.getUsername() + " ROLE : " + userData.getRole());
+
         } else {
-            JOptionPane.showMessageDialog(null, "Database is not connected. :(", "Login Error", 0);
+            JOptionPane.showMessageDialog(null, "Error Plase Try Again. :(", "Login Error", 0);
 
         }
         
