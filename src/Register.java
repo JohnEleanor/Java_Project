@@ -125,15 +125,26 @@ public final class Register extends JFrame implements ActionListener {
                      * role
                      * email
                     */
+                    // System.out.println(userField.getText());
+                    // System.out.println(passField.getText());
+                    boolean haved = db.getUsernameisAlready(userField.getText(), passField.getText());
+                    // System.out.println(haved);
+                    if (haved == false) {
+                        boolean Insert = db.insertUser(userField.getText(), passField.getText(), emailField.getText());
 
-                    boolean Insert = db.insertUser(userField.getText(), passField.getText(), emailField.getText());
 
-
-                    if (Insert){
-                        JOptionPane.showMessageDialog(null, "Register Success", "Success", 3);
-                        Login login = new Login();
-                        login.setVisible(true);
-                        this.dispose();
+                        if (Insert){
+                            JOptionPane.showMessageDialog(null, "Register Success", "Success", 3);
+                            Login login = new Login();
+                            login.setVisible(true);
+                            this.dispose();
+                        }else {
+                            userField.setText("");
+                            passField.setText("");
+                            passConfirmField.setText("");
+                            emailField.setText("");
+                            JOptionPane.showMessageDialog(null, "Error Can not insert", "Error", 2);
+                        }
                     }else {
                         userField.setText("");
                         passField.setText("");
@@ -141,6 +152,7 @@ public final class Register extends JFrame implements ActionListener {
                         emailField.setText("");
                         JOptionPane.showMessageDialog(null, "Register Error User Have Already", "Error", 2);
                     }
+                   
 
                    
 

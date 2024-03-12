@@ -35,26 +35,27 @@ public class DatabaseCFG {
         try (Connection conn = DriverManager.getConnection(this.url, this.user, this.password);
 
                 Statement stmt = conn.createStatement();
-                ResultSet rs = stmt.executeQuery(
-                        "SELECT * FROM user WHERE username = '" + username + "' AND password = '" + password + "'")) {
+                ResultSet rs = stmt.executeQuery("SELECT * FROM user WHERE username = '" + username + "' AND password = '" + password + "'")) {
             if (conn.isClosed()) {
                 System.out.println("[Debug]: Connection Closed");
             } else {
-                if (rs.next()) {
-
-                    if (isLogin) {
-
-                        System.out.println("[Debug]: isLogin True");
+                //! Login Check
+                if (isLogin) {
+                    if (rs.next()) {
+                        System.out.println("[Debug]: isLogin True => User Found");
                         return true;
                     } else {
-
-                        System.out.println("[Debug]: User Found");
+                        System.out.println("[Debug]: User Not Found");
                         return false;
                     }
-
                 } else {
-                    System.out.println("[Debug]: User Not Found");
-                    return false;
+                    if (rs.next()) {
+                        System.out.println("[Debug]: User Found");
+                        return true;
+                    } else {
+                        System.out.println("[Debug]: User Not Found");
+                        return false;
+                    }
                 }
 
             }
@@ -72,15 +73,15 @@ public class DatabaseCFG {
             String sql = "INSERT INTO user (username, password, role, email) VALUES ('" + username + "', '" + password
                     + "', 'user', '" + email + "')";
             stmt.executeUpdate(sql);
+            return true;
+            // if (checkUser(username, password, false)) {
+            //     System.out.println("[Debug]: User Insert Successfully");
+            //     return true;
+            // } else {
 
-            if (checkUser(username, password, false)) {
-                System.out.println("[Debug]: User Insert Successfully");
-                return true;
-            } else {
-
-                System.out.println("[Debug]: User Have Already");
-                return false;
-            }
+            //     System.out.println("[Debug]: User Have Already");
+            //     return false;
+            // }
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -118,4 +119,32 @@ public class DatabaseCFG {
         }
         return ("");
     }
+
+    public boolean getUsernameisAlready(String username, String password) {
+        try (Connection conn = DriverManager.getConnection(this.url, this.user, this.password);
+
+                Statement stmt = conn.createStatement();
+                ResultSet rs = stmt.executeQuery("SELECT * FROM user WHERE username = '" + username + "'")) {
+            if (conn.isClosed()) {
+                System.out.println("[Debug]: Connection Closed");
+            } else {
+                //! Login Check
+               
+                if (rs.next()) {
+                    System.out.println("[getUsernameisAlready]: User Found");
+                    return true;
+                } else {
+                    System.out.println("[getUsernameisAlready]: User Not Found");
+                    return false;
+                }
+
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+
+        }
+
+        return false;
+    }
 }
+
