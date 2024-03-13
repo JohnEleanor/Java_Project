@@ -10,7 +10,7 @@ public class DatabaseCFG {
     Connection conn = null;
     Statement stmt = null;
     
-
+    
     
     public void Connection() throws SQLClientInfoException, Exception {
     
@@ -20,16 +20,22 @@ public class DatabaseCFG {
         System.out.println("[Debug]: Database Connected Successfully");
     }
 
-    /*
-     * ! Zone For User
-    */
-
     public Statement getStatement() {
         return this.stmt;
     }
 
     public Connection getConnection() {
         return this.conn;
+    }
+
+    public void closeConnection() {
+        try {
+            conn.close();
+            stmt.close();
+            System.out.println("[Debug]: Database Connection Closed");
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public boolean checkUser(String username, String password) {
@@ -40,6 +46,8 @@ public class DatabaseCFG {
             ResultSet rs = db.getStatement().executeQuery("SELECT * FROM user WHERE username = '" + username + "' AND password = '" + password + "'");
             while (rs.next()) {
                 System.out.println("[Debug]: User Found");
+                db.closeConnection();
+                rs.close();
                 return true;
             }
 
@@ -59,6 +67,8 @@ public class DatabaseCFG {
             ResultSet rs = db.getStatement().executeQuery("INSERT INTO user (username, password, role, email) VALUES ('" + username + "', '" + password+ "', 'user', '" + email + "')");
             while (rs.next()) {
                 System.out.println("[Debug]: insertUser Success");
+                db.closeConnection();
+                rs.close();
                 return true;
             }
 
@@ -78,49 +88,45 @@ public class DatabaseCFG {
 
     }
 
-    public String getRole(String username, String password) {
+    public String getRole(String username, String password)  {
+        DatabaseCFG db = new DatabaseCFG();
         String role = "";
-        try (Connection conn = DriverManager.getConnection(this.url, this.user, this.password);
-                Statement stmt = conn.createStatement();
-                ResultSet rs = stmt.executeQuery("SELECT * FROM user WHERE username = '" + username + "' AND password = '" + password + "'")) {
-            if (rs.next()) {
+        String query = "SELECT * FROM user WHERE username = '" + username + "' AND password = '" + password + "'";
+        try {
+            db.Connection();
+            ResultSet rs = db.getStatement().executeQuery(query);
+            while (rs.next()) {
                 role = rs.getString("role");
+
+                // Close Connection
+                db.closeConnection();
+                rs.close();
                 return role;
-
-            } else {
-                System.out.println("[Debug]: User Not Found");
-                return "";
             }
-
-        } catch (SQLException e) {
+        } catch (Exception e) {
             System.out.println(e.getMessage());
-
         }
-        return ("");
+       
+
+        return role;
     }
 
     public boolean getUsernameisAlready(String username, String password) {
-        try (Connection conn = DriverManager.getConnection(this.url, this.user, this.password);
-                Statement stmt = conn.createStatement();
-                ResultSet rs = stmt.executeQuery("SELECT * FROM user WHERE username = '" + username + "'")) {
-            if (conn.isClosed()) {
-                System.out.println("[Debug]: Connection Closed");
-            } else {
-                //! Login Check
-               
-                if (rs.next()) {
-                    System.out.println("[getUsernameisAlready]: User Found");
-                    return true;
-                } else {
-                    System.out.println("[getUsernameisAlready]: User Not Found");
-                    return false;
-                }
-
+        DatabaseCFG db = new DatabaseCFG();
+        String query = "SELECT * FROM user WHERE username = '" + username + "'";
+        try {
+            db.Connection();
+            ResultSet rs = db.getStatement().executeQuery(query);
+            while (rs.next()) {
+                System.out.println("[Debug]: User Found");
+                return true;
             }
-        } catch (SQLException e) {
+            db.closeConnection();
+            rs.close();
+        } catch (Exception e) {
             System.out.println(e.getMessage());
-
         }
+        
 
         return false;
     }

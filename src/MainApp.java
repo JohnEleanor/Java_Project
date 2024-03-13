@@ -20,7 +20,7 @@ public final class MainApp extends JFrame implements ActionListener {
         container = getContentPane();
         container.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
-      // gbc.insets=new Insets(5,5,5,5);  
+        // gbc.insets=new Insets(5,5,5,5);  
         Font font = new Font("Tahoma", Font.PLAIN, 15);
 
         ExitBtn = new JButton("ออกจากระบบ");

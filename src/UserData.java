@@ -1,4 +1,4 @@
-
+import java.sql.*;
 
 public class UserData {
     private String username;
@@ -30,6 +30,23 @@ public class UserData {
 
     public String getRole(){
         if (this.role == null){
+            System.out.println("[Debug] getRole : null");
+            DatabaseCFG db = new DatabaseCFG();
+            try {
+                db.Connection();
+                ResultSet rs = db.getStatement().executeQuery("SELECT * FROM user WHERE username = '" + this.username + "'");
+                while (rs.next()) {
+                    this.role = rs.getString("role");
+                    System.out.println("[Debug] getRole : " + role);
+
+                    db.closeConnection();
+                    rs.close();
+
+                    return (this.role);
+                }
+            } catch (Exception e) {
+                
+            }
             System.out.println("[Debug] getRole : role is null");
             
         }else {
