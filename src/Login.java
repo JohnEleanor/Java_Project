@@ -76,7 +76,7 @@ public final class Login extends JFrame implements ActionListener {
 
     public void CheckLogin(String username, String password) {
 
-        boolean res = db.checkUser(username, password, true);
+        boolean res = db.checkUser(username, password);
         if (res) {
 
             MainApp mainApp = new MainApp();
