@@ -60,12 +60,11 @@ public class DatabaseCFG {
     }
 
     public boolean insertUser(String username, String password, String email) {
-
+        String query = "INSERT INTO user (username, password, role, email) VALUES ('"+ username + "', '" + password + "', 'user', '" + email + "')";
         try {
             DatabaseCFG db = new DatabaseCFG();
             db.Connection();
-            ResultSet rs = db.getStatement().executeQuery("INSERT INTO user (username, password, role, email) VALUES ('"
-                    + username + "', '" + password + "', 'user', '" + email + "')");
+            ResultSet rs = db.getStatement().executeQuery(query);
             while (rs.next()) {
                 if (Debug) System.out.println("[Debug]: insertUser Success");
                 db.closeConnection();

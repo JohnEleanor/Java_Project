@@ -10,7 +10,7 @@ public final class Login extends JFrame implements ActionListener {
     DatabaseCFG db = new DatabaseCFG();
     // Get Role Plase
     UserData userData = new UserData();
-
+    boolean Debug = false;
     public Login() {
         setTitle("Car Rental Management System");
         init();
@@ -85,10 +85,10 @@ public final class Login extends JFrame implements ActionListener {
 
             String role = db.getRole(username, password);
             if (role != null) {
-                System.out.println("Role : " + role);
+                if (Debug) System.out.println("Role : " + role);
                 userData.setRole(role);
             } else {
-                System.out.println("Role : NULL");
+                if (Debug) System.out.println("Role : NULL");
             }
 
             userData.setUser(username);
@@ -96,7 +96,7 @@ public final class Login extends JFrame implements ActionListener {
             String txt = "Welcome : " + userData.getUsername() + " To Car Rental Management System";
             JOptionPane.showMessageDialog(null, txt, "Alert", 3);
 
-            System.out.println("USER : " + userData.getUsername() + " ROLE : " + userData.getRole());
+            if (Debug) System.out.println("USER : " + userData.getUsername() + " ROLE : " + userData.getRole());
 
         } else {
             JOptionPane.showMessageDialog(null, "Error Plase Try Again. :(", "Login Error", 0);

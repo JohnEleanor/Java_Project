@@ -29,14 +29,14 @@ public class UserData {
 
     public String getRole() {
         if (this.role == null) {
-            System.out.println("[Debug] getRole : null");
+            // System.out.println("[Debug] getRole : null");
             DatabaseCFG db = new DatabaseCFG();
             try {
                 db.Connection();
                 ResultSet rs = db.getStatement().executeQuery("SELECT * FROM user WHERE username = '" + this.username + "'");
                 while (rs.next()) {
                     this.role = rs.getString("role");
-                    if (Debug)    System.out.println("[Debug] getRole : " + role);
+                    if (Debug) System.out.println("[Debug] getRole : " + role);
 
                     db.closeConnection();
                     rs.close();
