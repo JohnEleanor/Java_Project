@@ -90,7 +90,8 @@ public class DatabaseCFG {
 
     public String getRole(String username, String password) {
         DatabaseCFG db = new DatabaseCFG();
-        String role = "";
+        UserData userData = new UserData();
+        String role = userData.getRole();
         String query = "SELECT * FROM user WHERE username = '" + username + "' AND password = '" + password + "'";
         try {
             db.Connection();
@@ -98,6 +99,8 @@ public class DatabaseCFG {
             while (rs.next()) {
                 role = rs.getString("role");
 
+                
+                userData.setRole(role);
                 // Close Connection
                 db.closeConnection();
                 rs.close();

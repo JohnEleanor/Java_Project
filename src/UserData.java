@@ -3,7 +3,10 @@ import java.sql.*;
 public class UserData {
     private String username;
     private String role;
+
     boolean Debug = false;
+
+
     public void setUser(String username) {
 
         if (username == null) {
@@ -16,14 +19,15 @@ public class UserData {
     }
 
     public void setRole(String role) {
-
+        
         if (role == null) {
             System.out.println("[Debug] setUser : parameter is null");
         } else {
             this.role = role;
-
             if (Debug) System.out.println("[Debug] setUser Successfully : " + this.role);
         }
+
+        
 
     }
 
@@ -36,7 +40,8 @@ public class UserData {
                 ResultSet rs = db.getStatement().executeQuery("SELECT * FROM user WHERE username = '" + this.username + "'");
                 while (rs.next()) {
                     this.role = rs.getString("role");
-                    if (Debug) System.out.println("[Debug] getRole : " + role);
+
+                    System.out.println("[Debug] getRole : " + rs.getString("role"));
 
                     db.closeConnection();
                     rs.close();
@@ -49,11 +54,11 @@ public class UserData {
             if (Debug) System.out.println("[Debug] getRole : role is null");
 
         } else {
-            if (Debug) System.out.println("[Debug] getRole : " + role);
+            if (Debug) System.out.println("[Debug] role is Not Nill : " + role);
             return (this.role);
         }
 
-        return ("NILL");
+        return (this.role);
     }
 
     public String getUsername() {
@@ -74,6 +79,6 @@ public class UserData {
             if (Debug) System.out.println("[Debug] getUsername : " + username);
             return (this.username);
         }
-        return ("NILL");
+        return (this.role);
     }
 }

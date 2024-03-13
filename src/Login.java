@@ -79,7 +79,7 @@ public final class Login extends JFrame implements ActionListener {
         boolean res = db.checkUser(username, password);
         if (res) {
 
-            MainApp mainApp = new MainApp();
+            MainApp mainApp = new MainApp(username, password);
             mainApp.setVisible(true);
             this.dispose();
 
