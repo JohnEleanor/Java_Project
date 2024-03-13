@@ -9,10 +9,11 @@ public final class MainApp extends JFrame implements ActionListener {
     JButton LoginBtn, RegisterBtn, ExitBtn;
     UserData userData = new UserData();
 
+    boolean Debug = false;
+
     public MainApp() {
         init();
     }
-
 
     public void init() {
         setTitle("Car Rental Management System");
@@ -20,7 +21,7 @@ public final class MainApp extends JFrame implements ActionListener {
         container = getContentPane();
         container.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
-        // gbc.insets=new Insets(5,5,5,5);  
+        // gbc.insets=new Insets(5,5,5,5);
         Font font = new Font("Tahoma", Font.PLAIN, 15);
 
         ExitBtn = new JButton("ออกจากระบบ");
@@ -32,20 +33,19 @@ public final class MainApp extends JFrame implements ActionListener {
 
         if (userData.getRole().equals("admin")) {
 
-            System.out.println("[Debug] Admin");
+            if (Debug) System.out.println("[Debug] Admin");
 
         } else if (userData.getRole().equals("staff")) {
-            
-            System.out.println("[Debug] staff");
 
+            if (Debug) System.out.println("[Debug] staff");
 
         } else if (userData.getRole().equals("user")) {
 
-            System.out.println("[Debug] user");
+            if (Debug) System.out.println("[Debug] user");
 
-        }else {
+        } else {
 
-            System.out.println("[Debug] Role Not Found");
+            if (Debug) System.out.println("[Debug] Role Not Found");
         }
 
         setSize(500, 500);

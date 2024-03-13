@@ -24,7 +24,7 @@ public final class Login extends JFrame implements ActionListener {
     /*
      * USE Pin for Login มั้ย
      * ใช้อะไร Login
-    */
+     */
 
     public void init() {
         container = getContentPane();

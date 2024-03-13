@@ -8,14 +8,11 @@ public final class Register extends JFrame implements ActionListener {
     JTextField userField, passField, passConfirmField, emailField;
     JButton BackToHomePage, RegisterBtn;
 
-
     DatabaseCFG db = new DatabaseCFG();
-
 
     public Register() {
         setTitle("Car Rental Management System");
-        
-       
+
         init();
         setSize(500, 250);
         setLocationRelativeTo(null);
@@ -26,7 +23,7 @@ public final class Register extends JFrame implements ActionListener {
     /*
      * Use Pin for Login มั้ย
      * ใช้อะไร Login
-    */
+     */
     public void init() {
         container = getContentPane();
         container.setLayout(new GridBagLayout());
@@ -99,8 +96,6 @@ public final class Register extends JFrame implements ActionListener {
 
     }
 
-  
-
     public void actionPerformed(ActionEvent event) {
 
         if (event.getSource() == BackToHomePage) {
@@ -112,11 +107,10 @@ public final class Register extends JFrame implements ActionListener {
         } else if (event.getSource() == RegisterBtn) {
 
             // Check password match And not empty
-            if ((passField.getText().equals(passConfirmField.getText())) && (passField.getText().length() > 0 && passConfirmField.getText().length() > 0)) {
+            if ((passField.getText().equals(passConfirmField.getText()))
+                    && (passField.getText().length() > 0 && passConfirmField.getText().length() > 0)) {
 
                 if (userField.getText().length() > 0 && emailField.getText().length() > 0) {
-
-
 
                     // ! Register Success Let Save Data to Database
                     /*
@@ -124,7 +118,7 @@ public final class Register extends JFrame implements ActionListener {
                      * password
                      * role
                      * email
-                    */
+                     */
                     // System.out.println(userField.getText());
                     // System.out.println(passField.getText());
                     boolean haved = db.getUsernameisAlready(userField.getText(), passField.getText());
@@ -132,30 +126,25 @@ public final class Register extends JFrame implements ActionListener {
                     if (haved == false) {
                         boolean Insert = db.insertUser(userField.getText(), passField.getText(), emailField.getText());
 
-
-                        if (Insert){
+                        if (Insert) {
                             JOptionPane.showMessageDialog(null, "Register Success", "Success", 3);
                             Login login = new Login();
                             login.setVisible(true);
                             this.dispose();
-                        }else {
+                        } else {
                             userField.setText("");
                             passField.setText("");
                             passConfirmField.setText("");
                             emailField.setText("");
                             JOptionPane.showMessageDialog(null, "Error Can not insert", "Error", 2);
                         }
-                    }else {
+                    } else {
                         userField.setText("");
                         passField.setText("");
                         passConfirmField.setText("");
                         emailField.setText("");
                         JOptionPane.showMessageDialog(null, "Register Error User Have Already", "Error", 2);
                     }
-                   
-
-                   
-
 
                 } else {
 
